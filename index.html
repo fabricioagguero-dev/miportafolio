@@ -11,28 +11,18 @@
             --card-bg: rgba(255, 255, 255, 0.02);
             --accent-pink: #f472b6;
             --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
             --text-main: #f1f5f9;
             --text-dim: #64748b;
             --border: rgba(255, 255, 255, 0.06);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; }
 
         .grid-layer {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -43,221 +33,64 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
+            z-index: -1; pointer-events: none;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 5rem 1.5rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 5rem 1.5rem; }
 
-        header {
-            margin-bottom: 5rem;
-        }
-
-        .top-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
+        /* Header & Meta */
+        header { margin-bottom: 5rem; }
+        .top-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
         .status-pill {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--accent-blue);
-            text-transform: uppercase;
+            background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 4px 12px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; color: var(--accent-blue); text-transform: uppercase;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 1.5rem;
-        }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem; }
+        h1 span { color: var(--accent-blue); }
+        .bio { font-size: 1.1rem; color: var(--text-dim); max-width: 700px; }
 
-        h1 span {
-            color: var(--accent-blue);
-        }
+        /* Sections Labels */
+        .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-dim); margin: 4rem 0 1.5rem 0; display: block; text-transform: uppercase; letter-spacing: 0.1em; }
 
-        .bio {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            max-width: 700px;
+        /* Architecture Block */
+        .arch-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;
+            background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 12px;
         }
+        .arch-step { text-align: center; position: relative; }
+        .arch-step h5 { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--accent-blue); margin-bottom: 0.5rem; }
+        .arch-step p { font-size: 0.8rem; color: var(--text-dim); }
 
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 5rem;
-            border-top: 1px solid var(--border);
-            padding-top: 2.5rem;
-        }
+        /* Projects */
+        .projects-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+        .card:hover { border-color: rgba(56, 189, 248, 0.3); }
+        .card.active { border-color: var(--accent-pink); box-shadow: 0 0 30px rgba(244, 114, 182, 0.05); }
+        .card-header { padding: 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .card-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card.active .card-body { max-height: 1200px; }
+        .content-inner { padding: 0 2rem 2rem 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
 
-        .spec-item h4 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
+        /* Metrics */
+        .metrics-bar { display: flex; gap: 1.5rem; margin-top: 1.5rem; padding: 1rem; background: rgba(74, 222, 128, 0.03); border-radius: 8px; border: 1px dashed rgba(74, 222, 128, 0.2); }
+        .metric-item { display: flex; flex-direction: column; }
+        .metric-value { color: var(--accent-green); font-family: 'JetBrains Mono'; font-weight: 700; font-size: 1rem; }
+        .metric-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; }
 
-        .spec-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+        /* DevLog */
+        .log-entry { margin-bottom: 1.5rem; padding-left: 1rem; border-left: 2px solid var(--border); }
+        .log-date { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--accent-pink); }
+        .log-text { font-size: 0.9rem; color: var(--text-main); margin-top: 0.2rem; }
 
-        .tag {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 10px;
-            border-radius: 3px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            border: 1px solid var(--border);
-        }
+        /* Buttons & Contact */
+        .link-btn { display: inline-block; margin-top: 2rem; background: #fff; color: #000; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .contact-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.3s ease; }
+        .contact-card:hover { border-color: var(--accent-blue); background: rgba(56, 189, 248, 0.03); }
 
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .projects-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: border-color 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(244, 114, 182, 0.3);
-        }
-
-        .card-header {
-            padding: 2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-header h3 {
-            font-size: 1.5rem;
-        }
-
-        .card-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card.active .card-body {
-            max-height: 1000px;
-        }
-
-        .content-inner {
-            padding: 0 2rem 2rem 2rem;
-            border-top: 1px solid var(--border);
-            padding-top: 1.5rem;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        .info-block h5 {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent-pink);
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-        }
-
-        .info-block p {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-        }
-
-        .link-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            background: #fff;
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            transition: border-color 0.3s ease, background 0.3s ease;
-        }
-
-        .contact-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            background: rgba(56, 189, 248, 0.03);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contact-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-detail {
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        @media (max-width: 600px) {
-            .specs-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -269,77 +102,65 @@
         <header>
             <div class="top-meta">
                 <div class="status-pill">Fundador NexoraSaaS</div>
-                <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--text-dim);">17 Años / Argentina</div>
+                <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--text-dim);">18 Años / Argentina</div>
             </div>
             <h1>Fabricio Agüero<span>.</span></h1>
             <p class="bio">
-                Desarrollador Full Stack con +5 años de trayectoria autodidacta. 
-                Fundador de NexoraSaaS, especializado en ecosistemas automatizados y arquitectura de software.
-                Proyectando ingeniería en Sistemas de la Información y Tecnicatura en Programación en la UTN.
+                Ingeniero de Software enfocado en la construcción de ecosistemas escalables. 
+                Especializado en arquitectura Backend, automatización de procesos industriales y seguridad ofensiva/defensiva.
             </p>
         </header>
 
-        <div class="specs-grid">
-            <div class="spec-item">
-                <h4>Conocimientos</h4>
-                <div class="spec-list">
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">Arduino</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">HTML/CSS</span>
-                </div>
+        <span class="section-label">Core Architecture Stack</span>
+        <div class="arch-container">
+            <div class="arch-step">
+                <h5>01. Entry</h5>
+                <p>Nginx / Cloudflare Proxy</p>
             </div>
-            <div class="spec-item">
-                <h4>Áreas de Interés</h4>
-                <div class="spec-list">
-                    <span class="tag">Robótica</span>
-                    <span class="tag">Inteligencia Artificial</span>
-                    <span class="tag">Ciberseguridad</span>
-                    <span class="tag">NexoraSaaS Scaling</span>
-                </div>
+            <div class="arch-step">
+                <h5>02. Logic</h5>
+                <p>Node.js & Python Microservices</p>
+            </div>
+            <div class="arch-step">
+                <h5>03. Persistence</h5>
+                <p>MySQL & Redis Caching</p>
+            </div>
+            <div class="arch-step">
+                <h5>04. Ship</h5>
+                <p>Docker & GitHub Actions</p>
             </div>
         </div>
 
-        <span class="section-label">Casos de Estudio</span>
-
+        <span class="section-label">Proyectos Seleccionados</span>
         <div class="projects-wrapper">
             
             <article class="card">
                 <div class="card-header" onclick="toggleCard(this)">
                     <div>
-                        <div style="font-family: 'JetBrains Mono'; color: var(--accent-pink); font-size: 0.7rem; margin-bottom: 0.5rem;">PROYECTO: SOFY MDN</div>
-                        <h3>E-commerce + Automatización</h3>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Sincronización via Telegram Bot y GitHub Actions</p>
+                        <div style="font-family: 'JetBrains Mono'; color: var(--accent-pink); font-size: 0.7rem; margin-bottom: 0.5rem;">PROYECTO: SECURITY MONITOR</div>
+                        <h3>Intrusion Detection System</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Detección activa y respuesta automática a amenazas</p>
                     </div>
                     <div style="color: var(--accent-pink);">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                 </div>
-
                 <div class="card-body">
                     <div class="content-inner">
-                        <p style="color: var(--text-main); margin-bottom: 1.5rem;">
-                            Desarrollo de una plataforma que automatiza el control de stock de una tienda de indumentaria mediante un bot de mensajería, integrando el flujo de datos directamente con la infraestructura web.
+                        <p style="color: var(--text-main); margin-bottom: 1rem;">
+                            Microservicio de ciberseguridad que analiza flujos de tráfico en tiempo real para mitigar ataques de fuerza bruta y patrones de bots maliciosos mediante Risk Scoring dinámico.
                         </p>
-                        
-                        <div class="info-grid">
-                            <div class="info-block">
-                                <h5>Lógica de Integración</h5>
-                                <p>Procesamiento avanzado en Node.js y Python para la validación y categorización de productos vía API.</p>
+                        <div class="metrics-bar">
+                            <div class="metric-item">
+                                <span class="metric-value">< 50ms</span>
+                                <span class="metric-label">Latencia de análisis</span>
                             </div>
-                            <div class="info-block">
-                                <h5>Infraestructura CI/CD</h5>
-                                <p>Pipeline automatizado en GitHub Actions para el despliegue dinámico en servidores de Netlify.</p>
-                            </div>
-                            <div class="info-block">
-                                <h5>Optimización</h5>
-                                <p>Uso de estructuras JSON para persistencia de datos, garantizando eficiencia de carga y mantenimiento simplificado.</p>
+                            <div class="metric-item">
+                                <span class="metric-value">99.8%</span>
+                                <span class="metric-label">Precisión en Bots</span>
                             </div>
                         </div>
-
-                        <a href="https://sofymedina.netlify.app" target="_blank" class="link-btn">Explorar Proyecto</a>
+                        <a href="https://github.com/fabricioagguero-dev/security-monitor" target="_blank" class="link-btn">Analizar Código</a>
                     </div>
                 </div>
             </article>
@@ -347,59 +168,61 @@
             <article class="card">
                 <div class="card-header" onclick="toggleCard(this)">
                     <div>
-                        <div style="font-family: 'JetBrains Mono'; color: var(--accent-pink); font-size: 0.7rem; margin-bottom: 0.5rem;">PROYECTO: SECURITY MONITOR</div>
-                        <h3>Security Monitoring Service</h3>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Detección y respuesta de amenazas en tiempo real</p>
+                        <div style="font-family: 'JetBrains Mono'; color: var(--accent-pink); font-size: 0.7rem; margin-bottom: 0.5rem;">PROYECTO: SOFY MDN</div>
+                        <h3>Inventory Automation Engine</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Ecosistema CI/CD para retail automatizado</p>
                     </div>
                     <div style="color: var(--accent-pink);">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                 </div>
-
                 <div class="card-body">
                     <div class="content-inner">
-                        <p style="color: var(--text-main); margin-bottom: 1.5rem;">
-                            Microservicio independiente diseñado para integrarse en aplicaciones reales. Recibe eventos de seguridad, analiza el comportamiento para detectar ataques (como fuerza bruta o abuso de bots) y aplica medidas defensivas automáticamente.
+                        <p style="color: var(--text-main); margin-bottom: 1rem;">
+                            Plataforma integral que centraliza el stock físico y digital. Utiliza bots de Telegram como interfaz de administración y GitHub Actions para el despliegue de actualizaciones instantáneas.
                         </p>
-                        
-                        <div class="info-grid">
-                            <div class="info-block">
-                                <h5>Integración Real-Time</h5>
-                                <p>Recepción de logs de seguridad desde cualquier backend o middleware mediante endpoints dedicados.</p>
+                        <div class="metrics-bar">
+                            <div class="metric-item">
+                                <span class="metric-value">+400h</span>
+                                <span class="metric-label">Gestión ahorrada/año</span>
                             </div>
-                            <div class="info-block">
-                                <h5>Risk Scoring</h5>
-                                <p>Evaluación de amenazas basada en puntaje, calculando el riesgo por tipo de evento, frecuencia y reglas activadas.</p>
-                            </div>
-                            <div class="info-block">
-                                <h5>Defensa Activa</h5>
-                                <p>Bloqueo dinámico de IPs maliciosas y dashboard centralizado para la gestión de alertas y monitoreo del tráfico.</p>
+                            <div class="metric-item">
+                                <span class="metric-value">0ms</span>
+                                <span class="metric-label">Conflicto de stock</span>
                             </div>
                         </div>
-
-                        <a href="https://github.com/fabricioagguero-dev/security-monitor" target="_blank" class="link-btn">Ver Repositorio</a>
+                        <a href="https://sofymedina.netlify.app" target="_blank" class="link-btn">Explorar UI</a>
                     </div>
                 </div>
             </article>
-
         </div>
 
-        <span class="section-label">Contacto</span>
+        <span class="section-label">Engineering Logs</span>
+        <div class="card" style="padding: 2rem; cursor: default;">
+            <div class="log-entry">
+                <div class="log-date">ABRIL 2026 // PERFORMANCE</div>
+                <div class="log-text">Refactorización de persistencia en NexoraSaaS. Implementación de índices compuestos en MySQL reduciendo el tiempo de query en un 65% para datasets de >100k registros.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-date">MARZO 2026 // SECURITY</div>
+                <div class="log-text">Integración de Rate Limiting por IP y Fingerprinting en el Security Monitor. Bloqueo exitoso de 12k peticiones sospechosas durante fase de testeo.</div>
+            </div>
+        </div>
 
+        <span class="section-label">Contact_Protocol</span>
         <div class="contact-grid">
             <a href="mailto:fabricioaguero.dev.backend@gmail.com" class="contact-card">
-                <div style="color: var(--text-dim);">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <div style="color: var(--accent-blue);">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 </div>
                 <div class="contact-info">
                     <span class="contact-title">Email</span>
                     <span class="contact-detail">fabricioaguero.dev.backend@gmail.com</span>
                 </div>
             </a>
-
             <a href="https://wa.me/5493487219984" target="_blank" class="contact-card">
-                <div style="color: var(--text-dim);">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <div style="color: var(--accent-blue);">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 </div>
                 <div class="contact-info">
                     <span class="contact-title">WhatsApp</span>
