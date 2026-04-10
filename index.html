@@ -1,160 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabricio Agüero | Full Stack Developer & SaaS Founder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Fabricio Agüero | Full Stack & Cybersecurity</title>
 
-    <style>
-        :root {
-            --bg: #080809;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --accent-pink: #f472b6;
-            --accent-blue: #38bdf8;
-            --text-main: #f1f5f9;
-            --text-dim: #64748b;
-            --border: rgba(255, 255, 255, 0.06);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+:root {
+    --bg: #080809;
+    --card-bg: rgba(255,255,255,0.02);
+    --accent-pink: #f472b6;
+    --accent-blue: #38bdf8;
+    --text-main: #f1f5f9;
+    --text-dim: #64748b;
+    --border: rgba(255,255,255,0.06);
+}
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .grid-layer {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 35px 35px;
-        }
+body {
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
 
-        .glow-effect {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
-            z-index: -1;
-        }
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 5rem 1.5rem;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 5rem 1.5rem;
-        }
+header {
+    margin-bottom: 4rem;
+}
 
-        header {
-            margin-bottom: 5rem;
-        }
+.top-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
 
-        .top-meta {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
+.status-pill {
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.2);
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    color: var(--accent-blue);
+    font-family: monospace;
+}
 
-        .status-pill {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono';
-            font-size: 0.7rem;
-            color: var(--accent-blue);
-        }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
 
-        h1 {
-            font-size: 3rem;
-            margin: 1.5rem 0;
-        }
+.bio {
+    color: var(--text-dim);
+}
 
-        .bio {
-            color: var(--text-dim);
-        }
+.section-label {
+    margin: 3rem 0 1rem;
+    font-family: monospace;
+    color: var(--text-dim);
+}
 
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
+/* CARDS */
 
-        .tag {
-            background: rgba(255,255,255,0.05);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
-        }
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: 0.3s;
+}
 
-        .section-label {
-            font-family: monospace;
-            color: var(--text-dim);
-            margin-bottom: 1rem;
-            display: block;
-        }
+.card:hover {
+    border-color: rgba(56,189,248,0.3);
+}
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
+.card-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
 
-        .card-header {
-            padding: 1.5rem;
-            cursor: pointer;
-        }
+.card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s;
+}
 
-        .card-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: 0.4s;
-        }
+.card.active .card-body {
+    max-height: 1000px;
+}
 
-        .card.active .card-body {
-            max-height: 1000px;
-        }
+.content-inner {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+}
 
-        .content-inner {
-            padding: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
+/* PROJECT */
 
-        .info-grid {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
+.project-tag {
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: var(--accent-pink);
+}
 
-        .link-btn {
-            display: inline-block;
-            margin-top: 1rem;
-            background: white;
-            color: black;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-    </style>
+.project-tag.blue {
+    color: var(--accent-blue);
+}
+
+.project-sub {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.project-desc {
+    margin: 1rem 0;
+}
+
+.info-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.link-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: white;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.link-btn.blue {
+    background: var(--accent-blue);
+    color: black;
+}
+
+/* CONTACTO */
+
+.contact-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contact-item h5 {
+    color: var(--accent-blue);
+    font-family: monospace;
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: var(--accent-blue);
+}
+</style>
 </head>
 
 <body>
-
-<div class="grid-layer"></div>
-<div class="glow-effect"></div>
 
 <div class="container">
 
@@ -167,54 +186,92 @@
     <h1>Fabricio Agüero</h1>
 
     <p class="bio">
-        Desarrollador Full Stack enfocado en backend, automatización y ciberseguridad.
+        Desarrollador enfocado en backend, automatización y ciberseguridad. 
         Construyo sistemas reales integrables en producción.
     </p>
 </header>
 
 <span class="section-label">Casos de Estudio</span>
 
-<!-- SOFY -->
+<!-- PROYECTO 1 -->
 <div class="card" onclick="toggleCard(this)">
     <div class="card-header">
-        <h3>Sofy MDN</h3>
+        <div>
+            <div class="project-tag">E-COMMERCE</div>
+            <h3>Sofy MDN</h3>
+            <p class="project-sub">Automatización + Bot + CI/CD</p>
+        </div>
+        <div>⌄</div>
     </div>
+
     <div class="card-body">
         <div class="content-inner">
-            <p>E-commerce automatizado con bot y CI/CD.</p>
-            <a href="https://sofymedina.netlify.app" target="_blank" class="link-btn">Ver proyecto</a>
+            <p class="project-desc">
+                Plataforma automatizada de e-commerce con integración de bot y despliegue continuo.
+            </p>
+
+            <div class="info-grid">
+                <p><b>Stack:</b> Node.js, Python</p>
+                <p><b>Infra:</b> GitHub Actions</p>
+                <p><b>Tipo:</b> Automatización</p>
+            </div>
+
+            <a href="https://sofymedina.netlify.app" target="_blank" class="link-btn">
+                Ver Proyecto
+            </a>
         </div>
     </div>
 </div>
 
-<!-- SECURITY -->
+<!-- PROYECTO 2 -->
 <div class="card" onclick="toggleCard(this)">
     <div class="card-header">
-        <h3>Security Monitoring Service</h3>
+        <div>
+            <div class="project-tag blue">CYBERSECURITY</div>
+            <h3>Security Monitoring Service</h3>
+            <p class="project-sub">Threat Detection + Response</p>
+        </div>
+        <div>⌄</div>
     </div>
+
     <div class="card-body">
         <div class="content-inner">
-            <p>Microservicio de ciberseguridad para detección de ataques y respuesta automática en tiempo real.</p>
-            <a href="https://github.com/fabricioagguero-dev/security-monitor" target="_blank" class="link-btn">Ver en GitHub</a>
+            <p class="project-desc">
+                Microservicio de monitoreo de seguridad capaz de detectar ataques en tiempo real y aplicar defensas automáticas.
+            </p>
+
+            <div class="info-grid">
+                <p><b>Backend:</b> FastAPI</p>
+                <p><b>Detección:</b> Reglas de ataque</p>
+                <p><b>Uso:</b> Integración en producción</p>
+            </div>
+
+            <a href="https://github.com/fabricioagguero-dev/security-monitor" target="_blank" class="link-btn blue">
+                Ver en GitHub
+            </a>
         </div>
     </div>
 </div>
 
 <!-- CONTACTO -->
-<span class="section-label" style="margin-top:3rem;">Contacto</span>
+<span class="section-label">Contacto</span>
 
 <div class="card">
-    <div class="content-inner">
+    <div class="content-inner contact-grid">
 
-        <p>Email:</p>
-        <a href="mailto:fabricioaguero.dev.backend@gmail.com" class="link-btn">
-            fabricioaguero.dev.backend@gmail.com
-        </a>
+        <div class="contact-item">
+            <h5>Email</h5>
+            <a href="mailto:fabricioaguero.dev.backend@gmail.com">
+                fabricioaguero.dev.backend@gmail.com
+            </a>
+        </div>
 
-        <p style="margin-top:1rem;">WhatsApp:</p>
-        <a href="https://wa.me/5493487219984" target="_blank" class="link-btn">
-            +54 9 3487 219984
-        </a>
+        <div class="contact-item">
+            <h5>WhatsApp</h5>
+            <a href="https://wa.me/5493487219984" target="_blank">
+                +54 9 3487 219984
+            </a>
+        </div>
 
     </div>
 </div>
